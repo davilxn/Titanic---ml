@@ -25,3 +25,9 @@ https://www.kaggle.com/competitions/titanic)
 - O MLP (Multilayer Perceptron) foi adicionado como novo modelo de previsão.
 - Foi utilizado o GridSearchCV para busca dos melhores hiperparâmetros de todos os modelos de classificação criados.
 - Melhor acurácia direta: MLP, com 83%.
+
+### [Parte 5](https://github.com/davilxn/Titanic---ml/blob/main/titanic_sink_v5.ipynb)
+- O GradientBoosting e XGBoost foram adicionados como novos modelos de previsão.
+- O algoritmo K-Folds Cross Validation foi utilizado com divisão de 10 partes para medir com maior eficiência a acurácia dos modelos.
+- Agora, considera-se como acurácia final de cada modelo a média das acurácias obtidas em 30 execuções do K-Folds Cross Validation.
+- Melhor acurácia: XGBoost, 83.2%
