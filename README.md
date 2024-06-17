@@ -30,5 +30,5 @@ https://www.kaggle.com/competitions/titanic)
 - Foi utilizado o GridSearchCV para busca dos melhores hiperparâmetros de todos os modelos de classificação criados.
 - O algoritmo K-Folds Cross Validation foi utilizado com divisão de 10 partes para medir com maior eficiência a acurácia dos modelos.
 - Melhor acurácia de validação: ANN, com 82.5%.
-- Melhor acurácia por CV: XGBoost (min: 83.2, mean: 84.0, max: 85.1)
+- Melhor acurácia por CV: XGBoost (min: 83.2%, mean: 84.0%, max: 85.1%)
 - Acurácia das previsões de teste submetidas: 78.0%
