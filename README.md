@@ -6,28 +6,29 @@ https://www.kaggle.com/competitions/titanic)
 - Nesse etapa foram realizados os passos iniciais para exploração e tratamento da base de dados. 
 - Colunas com alta cardinalidade e elevada quantidade de valores faltantes foram excluídas e aquelas com quantidades menores, tiveram seus valores faltantes substituídos pela média ou mediana da coluna.
 - Nesta etapa, todas as variáveis categóricas do dataset foram desconsideradas no treinamento dos modelos.
-- Foram criados 3 modelos de previsão: Regressão Logística, Random Forest e SVM (Support Vector Machine).
-- Melhor acurácia direta: Regressão Lógistica, com 72.5%.
+- Foram usados 3 modelos de classificação: Regressão Logística, Random Forest e SVM (Support Vector Machine).
+- Melhor acurácia de validação: Regressão Lógistica, com 72.5%.
+- Acurácia das previsões de teste submetidas: 67.2%
 
 ### [Parte 2](https://github.com/davilxn/Titanic---ml/blob/main/titanic_sink_v2.ipynb)
 - Esta etapa é marcada pelo tratamento das variáveis categóricas que restaram (após a exclusão das colunas de alta cardinalidade na etapa anterior) através da codificação com o OneHotEncoder. As colunas codificadas foram "Sex" e "Embarked".
 - Após a codificação das variáveis categóricas, foi realizada a padronização/escalonamento dos dados da base, melhorando as previsões dos algoritmos que tem base em cálculos de distância, nesse caso, o SVM. Inicialmente, para a padronização, foi utilizado o StandardScaler.
-- Melhor acurácia direta: Regressão Logística, com 81.3%.
+- Melhor acurácia de validação: Regressão Logística, com 81.3%.
+- Acurácia das previsões de teste submetidas: 65.0%
 
 ### [Parte 3](https://github.com/davilxn/Titanic---ml/blob/main/titanic_sink_v3.ipynb)
-- Foram observadas, apenas para fins de visualização, algumas relações entre as variáveis "SibSp" e "Parch".
-- Após analisar, desconsiderando a prévia padronização, a escala dos dados da base de treino, foi observada além das diferenças de escala, a presença de outliers na coluna "SibSp". Desta forma, optou-se pela utilização do RobustScaler para a padronização dos dados.
-- Foi realizada uma verificação simples de importância dos atributos da base de treino para classificação através do Random Forest.
-- Melhor acurácia direta: SVM, com 81.6%.
+- Foi desconsiderada a exclusão de colunas categóricas anteriormente realizada, em prol da realização uma exploração mais aprofundada das relações entre as variáveis previsoras e a variável alvo (Survived) e das variáveis previsoras entre si, na busca por padrões que tornassem os dados mais discriminatórios.
+- Com base na exploração realizada, foram aplicadas técnicas de engenheria de atributos, que resultaram na modificação de algumas colunas (Fare, Age, Sex) e na criação de novas (Family, Titles, AgePclass).
+- Foi desconsiderada, nesta etapa, o uso de padronizadores/normalizadores. Além disso, foi utilizado One Hot Enconder para codificação da variável categórica nominal "Embarked".
+- Foram realizadas estratégias simples de seleção de atributos, através de análise de correlação e avaliação de importância de atributos com RandomForestClassifier. O método de VarianceThreshold se mostrou ineficiente diante das variâncias médias elevadas de todas as colunas.
+- Melhor acurácia de validação: SVM, com 80.6%.
+- Acurácia das previsões de teste submetidas: 76.3%
 
 ### [Parte 4](https://github.com/davilxn/Titanic---ml/blob/main/titanic_sink_v4.ipynb)
-- Foram realizadas estratégias simples de seleção de atributos, através de análise de correlação e análise de importância de atributos com RandomForestClassifier. O método de VarianceThreshold se mostrou ineficiente diante das variâncias médias elevadas de todas as colunas.
-- O MLP (Multilayer Perceptron) foi adicionado como novo modelo de previsão.
+- Foram adicionados como novos modelos de previsão: Gradient Boosting e XGBoost.
+- Foi criado e adicionado como modelo extra de previsão uma ANN (torch.nn.Module).
 - Foi utilizado o GridSearchCV para busca dos melhores hiperparâmetros de todos os modelos de classificação criados.
-- Melhor acurácia direta: MLP, com 83%.
-
-### [Parte 5](https://github.com/davilxn/Titanic---ml/blob/main/titanic_sink_v5.ipynb)
-- O GradientBoosting e XGBoost foram adicionados como novos modelos de previsão.
 - O algoritmo K-Folds Cross Validation foi utilizado com divisão de 10 partes para medir com maior eficiência a acurácia dos modelos.
-- Agora, considera-se como acurácia final de cada modelo a média das acurácias obtidas em 30 execuções do K-Folds Cross Validation.
-- Melhor acurácia: XGBoost, 83.2%
+- Melhor acurácia de validação: ANN, com 82.5%.
+- Melhor acurácia por CV: XGBoost (min: 83.2, mean: 84.0, max: 85.1)
+- Acurácia das previsões de teste submetidas: 78.0%
